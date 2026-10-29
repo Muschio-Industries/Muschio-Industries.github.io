@@ -3,19 +3,32 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Muschio Industries: progetti, numeri e pronostici. Consulta il registro pubblico delle puntate.">
+  <meta name="description" content="Muschio Industries: una raccolta ludica di idee, cazzate e pronostici.">
   <meta name="theme-color" content="#07553d">
   <title>Muschio Industries</title>
   <style>
-    :root{--green:#07553d;--yellow:#ffdb16;--ink:#26343d;--paper:#e7e9eb}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 Arial,Helvetica,sans-serif}a{color:inherit}a:focus-visible{outline:3px solid #d2b400;outline-offset:6px}.wrap{width:min(1120px,calc(100% - 48px));margin:auto}header{background:var(--green);color:white;border-bottom:5px solid var(--yellow)}nav{min-height:92px;display:flex;justify-content:space-between;align-items:center;gap:24px}.brand{text-decoration:none;font-size:27px;font-weight:900;font-style:italic;letter-spacing:-1px}.brand span{color:var(--yellow)}.nav-link{font-size:13px;text-underline-offset:5px}.hero{position:relative;padding:84px 0 76px;background:var(--green);color:white;overflow:hidden}.hero:after{content:'MI';position:absolute;right:-15px;bottom:-100px;font-size:400px;line-height:1;font-weight:900;font-style:italic;letter-spacing:-35px;color:#ffffff06;pointer-events:none}.eyebrow{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--yellow)}h1{position:relative;z-index:1;max-width:800px;margin:22px 0;font-size:clamp(45px,8vw,92px);line-height:1.03;letter-spacing:-4px}h1 span{color:var(--yellow)}.intro{max-width:560px;color:#d1e0d9;font-size:18px;margin-bottom:32px}.button{position:relative;z-index:1;display:inline-flex;align-items:center;gap:25px;padding:15px 24px;background:var(--yellow);color:var(--green);text-decoration:none;font-weight:800;border:2px solid var(--yellow)}.button:hover{background:#ffe652}.projects{padding:52px 0 64px}.section-label{color:var(--green);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase}.project{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;background:white;border:1px solid #d0d5d9}.project-copy{padding:36px}.project h2{font-size:32px;line-height:1.15;letter-spacing:-1px;margin:10px 0 18px}.project p{color:#667078;margin:0 0 26px}.project-link{font-weight:800;color:var(--green);text-underline-offset:5px}.project-detail{padding:36px;background:#f3f5f3;display:flex;flex-direction:column;justify-content:center;border-left:1px solid #d0d5d9}.detail{padding:16px 0;border-bottom:1px solid #d0d5d9}.detail:first-child{padding-top:0}.detail:last-child{border:0;padding-bottom:0}.detail strong{display:block;color:var(--green);font-size:17px}.detail span{font-size:13px;color:#667078}footer{border-top:1px solid #c9cfd2;padding:24px 0;font-size:12px;color:#667078}.footer-row{display:flex;justify-content:space-between;gap:20px}footer a{text-underline-offset:4px}@media(max-width:640px){.wrap{width:calc(100% - 32px)}nav{min-height:80px}.brand{font-size:22px}.nav-link{font-size:11px}.hero{padding:56px 0}h1{letter-spacing:-2px}.intro{font-size:16px}.project{grid-template-columns:1fr}.project-copy,.project-detail{padding:26px}.project-detail{border-left:0;border-top:1px solid #d0d5d9}.footer-row{flex-direction:column;gap:8px}}
+    :root{--green:#07553d;--yellow:#ffdb16;--paper:#f2f3ef}
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--green);font:16px/1.5 Arial,Helvetica,sans-serif}
+    .page{min-height:100vh;display:grid;place-items:center;padding:24px}
+    .content{width:min(680px,100%);text-align:center}
+    .brand{margin:0;font-size:clamp(42px,10vw,76px);line-height:1;font-style:italic;letter-spacing:-4px}
+    .brand span{color:#d2b400}
+    .intro{margin:28px auto 34px;max-width:540px;font-size:clamp(18px,3vw,24px);color:#384c43}
+    .button{display:inline-block;padding:14px 22px;background:var(--yellow);color:var(--green);font-weight:800;text-decoration:none}
+    .button:hover{background:#ffe652}
+    a:focus-visible{outline:3px solid #d2b400;outline-offset:5px}
+    footer{margin-top:42px;font-size:12px;color:#66746d}
   </style>
 </head>
 <body>
-  <header><nav class="wrap" aria-label="Navigazione principale"><a class="brand" href="./">Muschio<span>Industries</span></a><a class="nav-link" href="./registro-puntate/">Registro puntate ↗</a></nav></header>
-  <main>
-    <section class="hero"><div class="wrap"><div class="eyebrow">Muschio Industries / Progetti</div><h1>Le idee prendono forma.<br><span>I pronostici, numero.</span></h1><p class="intro">Uno spazio per i nostri progetti. Si parte da MuschioStats: il registro pubblico per seguire le puntate, le date e tutti i numeri in gioco.</p><a class="button" href="./registro-puntate/">Esplora il registro <span aria-hidden="true">↗</span></a></div></section>
-    <section class="projects wrap" aria-labelledby="project-title"><div class="section-label">Il progetto in primo piano</div><article class="project"><div class="project-copy"><div class="section-label">MuschioStats</div><h2 id="project-title">Registro puntate pubblico</h2><p>Il quadro dei pronostici, tutto in una pagina: calendario delle date, distribuzione delle puntate e statistiche aggiornate manualmente.</p><a class="project-link" href="./registro-puntate/">Apri la dashboard <span aria-hidden="true">→</span></a></div><div class="project-detail"><div class="detail"><strong>Calendario dei pronostici</strong><span>Le date scelte e la loro distribuzione.</span></div><div class="detail"><strong>Numeri e statistiche</strong><span>Una lettura d'insieme delle puntate raccolte.</span></div><div class="detail"><strong>Versione pubblica anonimizzata</strong><span>I partecipanti sono indicati con le sole iniziali.</span></div></div></article></section>
+  <main class="page">
+    <div class="content">
+      <p class="brand">Muschio<span>Industries</span></p>
+      <p class="intro">Questa repo ha un solo scopo: raccogliere cazzate fatte nei momenti di noia. Niente di serio, ma sempre al vostro servizio.</p>
+      <a class="button" href="./registro-puntate/">Vai al registro puntate&nbsp;↗</a>
+      <footer>Una cosa fatta per gioco. E si vede.</footer>
+    </div>
   </main>
-  <footer><div class="wrap footer-row"><span>Muschio Industries</span><a href="https://github.com/Muschio-Industries/Muschio-Industries.github.io">Il progetto su GitHub ↗</a></div></footer>
 </body>
 </html>
