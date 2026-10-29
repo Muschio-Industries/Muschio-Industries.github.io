@@ -39,7 +39,7 @@ const bets=[
 {initials:'AZ2',date:'2026-11-19',received:'2026-10-28',place:'Leno',lat:45.367,lng:10.2185},
 {initials:'SB',date:'2026-11-11',received:'2026-10-28',place:'Manerbio',lat:45.35612,lng:10.13791},
 {initials:'ARZ',date:'2026-11-14',received:'2026-10-29',place:'Orzinuovi',lat:45.4049,lng:9.9226},
-{initials:'EC',date:'2026-11-19',received:'2026-10-29',place:'Da comunicare',lat:NaN,lng:NaN},
+{initials:'EC',date:'2026-11-19',received:'2026-10-29',place:'Caionvico (BS)',lat:45.525306,lng:10.288554},
 {initials:'MM',date:'2026-11-18',received:'2026-10-29',place:'Da comunicare',lat:NaN,lng:NaN}
 ];
 const stake=3,due=Date.UTC(2026,10,16),day=86400000,colors={pre:'#07553d',due:'#d2b400',post:'#4b5961'},fmtDate=new Intl.DateTimeFormat('it-IT',{day:'numeric',month:'short',timeZone:'UTC'}),fmtLong=new Intl.DateTimeFormat('it-IT',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}),eur=n=>new Intl.NumberFormat('it-IT',{style:'currency',currency:'EUR'}).format(n),toTime=s=>Date.parse(`${s}T00:00:00Z`),offset=s=>Math.round((toTime(s)-due)/day),prize=s=>{const d=offset(s);return d>=-10&&d<=5?1:d>=-14&&d<=14?1.5:2},pirli=n=>n===1?'1 pirlo':`${n.toLocaleString('it-IT')} pirli`;
