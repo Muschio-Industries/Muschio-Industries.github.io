@@ -1,0 +1,21 @@
+/* Incremental site-wide improvements; the legacy dashboard styles remain inline for now. */
+:focus-visible {
+  outline: 3px solid #ffdb16;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@media (max-width: 650px) {
+  .panel-head h2 {
+    line-height: 1.2;
+  }
+
+  .geo-side {
+    min-width: 0;
+  }
+}
