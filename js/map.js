@@ -38,7 +38,7 @@ if (places.length) {
       paint: {
         'heatmap-weight': ['interpolate', ['linear'], ['get', 'count'], 1, 0.65, 4, 1.8],
         'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 8, 1.05, 10, 1.35, 12, 1.7],
-        'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 8, 42, 10, 56, 12, 72],
+        'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 8, 68, 10, 90, 12, 116],
         'heatmap-color': [
           'interpolate',
           ['linear'],
