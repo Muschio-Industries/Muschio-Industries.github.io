@@ -10,7 +10,7 @@ const bets = [
   { initials: 'SB', date: '2026-11-11', received: '2026-10-28', place: 'Manerbio', lat: 45.35612, lng: 10.13791 },
   { initials: 'ARZ', date: '2026-11-14', received: '2026-10-29', place: 'Orzinuovi', lat: 45.4049, lng: 9.9226 },
   { initials: 'EC', date: '2026-11-19', received: '2026-10-29', place: 'Caionvico (BS)', lat: 45.525306, lng: 10.288554 },
-  { initials: 'MM', date: '2026-11-18', received: '2026-10-29', place: 'Da comunicare', lat: NaN, lng: NaN }
+  { initials: 'BO', date: '2026-11-18', received: '2026-10-29', place: 'Cazzago San Martino', lat: 45.5796182, lng: 10.0258983 }
 ];
 
 const stake = 3;
