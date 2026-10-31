@@ -4,6 +4,7 @@ Sito statico pubblicato su GitHub Pages:
 
 - [Homepage](./index.html)
 - [Registro puntate](./registro-puntate/index.html)
+- [Analisi archivio WhenTaken](./whentaken-archive/index.html)
 
 ## Aggiornare il registro
 

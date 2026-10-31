@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Esplora l'archivio storico delle immagini di WhenTaken." />
+    <meta name="theme-color" content="#10162f" />
+    <title>WhenTaken Archive | Muschio Industries</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="https://muschio-industries.github.io/" aria-label="Muschio Industries">
+        <span class="brand-mark">MI</span>
+        <span>Muschio Industries</span>
+      </a>
+      <button class="menu-button" id="menu-button" aria-label="Apri navigazione" aria-expanded="false">Menu</button>
+      <nav id="main-nav" aria-label="Sezioni">
+        <a href="#panoramica">Panoramica</a>
+        <a href="#geografia">Geografia</a>
+        <a href="#tempo">Anni</a>
+        <a href="#ripetizioni">Ripetizioni</a>
+        <a href="#italia">Italia</a>
+        <a href="#cerca">Cerca</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="panoramica">
+        <div class="hero-copy">
+          <p class="eyebrow">WhenTaken Personal Archive</p>
+          <h1>Il mondo, un'immagine alla volta.</h1>
+          <p class="hero-text">Un archivio esplorabile delle fotografie apparse in WhenTaken: luoghi, anni e immagini che ritornano nel tempo.</p>
+          <div class="freshness"><span class="status-dot"></span><span id="freshness">Caricamento archivio...</span></div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="globe-grid"></div>
+          <span class="pin pin-a"></span><span class="pin pin-b"></span><span class="pin pin-c"></span>
+          <div class="hero-number"><strong id="hero-images">-</strong><span>immagini uniche</span></div>
+        </div>
+      </section>
+
+      <section class="metrics" aria-label="Riepilogo archivio">
+        <article><span>Apparizioni</span><strong id="metric-appearances">-</strong></article>
+        <article><span>Paesi</span><strong id="metric-countries">-</strong></article>
+        <article><span>Immagini ripetute</span><strong id="metric-repeats">-</strong></article>
+        <article><span>Ripetizione massima</span><strong id="metric-max">-</strong></article>
+      </section>
+
+      <section class="section" id="geografia">
+        <div class="section-heading"><div><p class="eyebrow">Copertura geografica</p><h2>Dove ci porta WhenTaken</h2></div><p>I paesi piu presenti nell'archivio e la densita reale delle coordinate fotografiche.</p></div>
+        <div class="chart-grid">
+          <article class="panel panel-chart"><div class="panel-title"><h3>Paesi piu rappresentati</h3><select id="country-limit" aria-label="Numero di paesi"><option value="10">Top 10</option><option value="20" selected>Top 20</option><option value="40">Top 40</option></select></div><div class="chart-wrap chart-tall"><canvas id="countries-chart"></canvas></div></article>
+          <article class="panel panel-chart"><div class="panel-title"><h3>Continenti</h3></div><div class="chart-wrap"><canvas id="continents-chart"></canvas></div><div id="continent-legend" class="legend"></div></article>
+        </div>
+        <article class="panel map-panel"><div class="panel-title"><div><h3>Densita delle immagini</h3><p>Ogni punto usa le coordinate originali del dataset.</p></div><div class="map-scale"><span>Bassa</span><i></i><span>Alta</span></div></div><div id="density-map" class="map"></div></article>
+      </section>
+
+      <section class="section section-alt" id="tempo">
+        <div class="section-heading"><div><p class="eyebrow">Viaggio nel tempo</p><h2>La distribuzione degli anni</h2></div><p>Le fotografie sono raggruppate in intervalli di cinque anni per rendere leggibile l'evoluzione dell'archivio.</p></div>
+        <article class="panel panel-chart"><div class="panel-title"><h3>Immagini per periodo</h3><span class="hint">Bin di 5 anni</span></div><div class="chart-wrap chart-wide"><canvas id="years-chart"></canvas></div></article>
+      </section>
+
+      <section class="section" id="ripetizioni">
+        <div class="section-heading"><div><p class="eyebrow">Immagini ricorrenti</p><h2>Quando la storia ritorna</h2></div><p>Una ripetizione conta solo se l'immagine era gia apparsa in una partita precedente.</p></div>
+        <div class="repeat-summary"><article><span>Ultimi 30 giorni</span><strong id="last-month-average">-</strong><small>ripetizioni medie al giorno</small></article><article><span>Quota recente</span><strong id="last-month-share">-</strong><small>delle immagini gia viste</small></article></div>
+        <article class="panel panel-chart"><div class="panel-title"><h3>Media settimanale</h3><span class="hint">Ultime 26 settimane</span></div><div class="chart-wrap chart-wide"><canvas id="repeats-chart"></canvas></div></article>
+      </section>
+
+      <section class="section section-alt" id="italia">
+        <div class="section-heading"><div><p class="eyebrow">Focus Italia</p><h2>Le localita italiane</h2></div><p>Le varianti inglesi e i refusi noti sono ricondotti allo stesso nome italiano.</p></div>
+        <div class="italy-layout">
+          <article class="italy-total"><span>Archivio italiano</span><strong id="italy-total">-</strong><p id="italy-detail">-</p></article>
+          <article class="panel panel-chart"><div class="panel-title"><h3>Citta piu presenti</h3></div><div class="chart-wrap"><canvas id="italy-chart"></canvas></div></article>
+        </div>
+        <div id="city-list" class="city-list"></div>
+      </section>
+
+      <section class="section search-section" id="cerca">
+        <div class="section-heading"><div><p class="eyebrow">Esplora l'archivio</p><h2>Cerca una partita</h2></div><p>Seleziona una data per vedere le cinque immagini e scoprire se erano gia comparse.</p></div>
+        <form id="date-form" class="date-search"><label for="game-date">Data della partita</label><div><input id="game-date" name="game-date" type="date" required /><button type="submit">Cerca</button></div></form>
+        <p id="search-message" class="search-message"></p>
+        <div id="search-results" class="results-grid"></div>
+      </section>
+    </main>
+
+    <footer><div><strong>WhenTaken Archive</strong><span>Un progetto Muschio Industries</span></div><p>Dati pubblici di WhenTaken. Le immagini restano attribuite alle rispettive fonti.</p></footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
