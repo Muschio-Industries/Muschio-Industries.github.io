@@ -64,10 +64,77 @@ function renderItaly() {
 }
 
 function renderMap() {
-  const map = L.map('density-map', { scrollWheelZoom: false, minZoom: 2 }).setView([20, 8], 2);
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; OpenStreetMap &copy; CARTO', maxZoom: 19 }).addTo(map);
-  const points = images.filter(r => Number.isFinite(Number(r.lat)) && Number.isFinite(Number(r.lng))).map(r => [Number(r.lat), Number(r.lng), .55]);
-  L.heatLayer(points, { radius: 18, blur: 16, minOpacity: .35, gradient: { .15:'#25c3d9', .4:'#b8d93b', .65:'#f5c84b', .82:'#f47b43', 1:'#f64f9b' } }).addTo(map);
+  const points = images.filter(row => Number.isFinite(Number(row.lat)) && Number.isFinite(Number(row.lng)));
+  const locations = new Map();
+  points.forEach((row) => {
+    const key = `${row.lat},${row.lng}`;
+    const current = locations.get(key) || { lat: Number(row.lat), lng: Number(row.lng), count: 0 };
+    current.count += 1;
+    locations.set(key, current);
+  });
+  const places = [...locations.values()];
+  const map = new maplibregl.Map({
+    container: 'density-map',
+    style: 'https://tiles.openfreemap.org/styles/positron',
+    center: [8, 20],
+    zoom: 2,
+    attributionControl: true
+  });
+  map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-left');
+  map.on('load', () => {
+    const geoFeatures = places.map((place) => ({
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: [place.lng, place.lat] },
+      properties: { count: place.count }
+    }));
+    map.addSource('image-points', {
+      type: 'geojson',
+      data: { type: 'FeatureCollection', features: geoFeatures }
+    });
+    map.addLayer({
+      id: 'image-density',
+      type: 'heatmap',
+      source: 'image-points',
+      maxzoom: 14,
+      paint: {
+        'heatmap-weight': ['interpolate', ['linear'], ['get', 'count'], 1, 0.4, 20, 1.2],
+        'heatmap-intensity': ['interpolate', ['linear'], ['zoom'], 2, 0.65, 6, 0.9, 10, 1.2],
+        'heatmap-radius': ['interpolate', ['linear'], ['zoom'], 2, 20, 6, 42, 10, 76],
+        'heatmap-color': [
+          'interpolate',
+          ['linear'],
+          ['heatmap-density'],
+          0, 'rgba(39, 50, 160, 0)',
+          0.04, 'rgba(56, 35, 168, 0.12)',
+          0.12, 'rgba(56, 35, 168, 0.28)',
+          0.24, '#7b2cbf',
+          0.4, '#b72abb',
+          0.56, '#e238a6',
+          0.7, '#e35b4f',
+          0.88, '#f0a43c',
+          1, '#f7d96a'
+        ],
+        'heatmap-opacity': 0.68
+      }
+    });
+    map.addLayer({
+      id: 'image-locations',
+      type: 'circle',
+      source: 'image-points',
+      paint: {
+        'circle-radius': ['interpolate', ['linear'], ['get', 'count'], 1, 2, 20, 4],
+        'circle-color': '#f7d96a',
+        'circle-opacity': 0.62,
+        'circle-stroke-color': '#fff',
+        'circle-stroke-width': 1
+      }
+    });
+    if (places.length > 1) {
+      const bounds = new maplibregl.LngLatBounds();
+      places.forEach((place) => bounds.extend([place.lng, place.lat]));
+      map.fitBounds(bounds, { padding: 45, maxZoom: 3.5, duration: 0 });
+    }
+  });
 }
 
 function renderSearch(date) {
