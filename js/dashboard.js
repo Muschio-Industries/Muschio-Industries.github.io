@@ -13,7 +13,8 @@ const bets = [
   { initials: 'BO', date: '2026-11-18', received: '2026-10-29', place: 'Cazzago San Martino', lat: 45.5796182, lng: 10.0258983 },
   { initials: 'EG', date: '2026-11-23', received: '2026-10-31', place: 'Bagnolo Mella', lat: 45.430, lng: 10.190 },
   { initials: 'FRF', date: '2026-11-20', received: '2026-10-31', place: 'Ghedi', lat: 45.402, lng: 10.276 },
-  { initials: 'LC', date: '2026-11-13', received: '2026-10-31', place: 'Leno', lat: 45.367, lng: 10.2185 }
+  { initials: 'LC', date: '2026-11-13', received: '2026-10-31', place: 'Leno', lat: 45.367, lng: 10.2185 },
+  { initials: 'FP', date: '2026-11-23', received: '2026-10-31', place: 'Ghedi', lat: 45.402, lng: 10.276 }
 ];
 
 const stake = 3;
