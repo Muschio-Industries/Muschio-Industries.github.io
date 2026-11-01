@@ -14,7 +14,8 @@ const bets = [
   { initials: 'EG', date: '2026-11-23', received: '2026-10-31', place: 'Bagnolo Mella', lat: 45.430, lng: 10.190 },
   { initials: 'FRF', date: '2026-11-20', received: '2026-10-31', place: 'Ghedi', lat: 45.402, lng: 10.276 },
   { initials: 'LC', date: '2026-11-13', received: '2026-10-31', place: 'Leno', lat: 45.367, lng: 10.2185 },
-  { initials: 'FP', date: '2026-11-23', received: '2026-10-31', place: 'Ghedi', lat: 45.402, lng: 10.276 }
+  { initials: 'FP', date: '2026-11-23', received: '2026-10-31', place: 'Ghedi', lat: 45.402, lng: 10.276 },
+  { initials: 'FM', date: '2026-11-13', received: '2026-11-01', place: 'Bagnolo Mella', lat: 45.430, lng: 10.190 }
 ];
 
 const stake = 3;
@@ -123,6 +124,69 @@ bars('prize-bars', [1, 1.5, 2].map((value, index) => ({
   value: bets.filter((bet) => prize(bet.date) === value).length,
   className: index === 0 ? '' : index === 1 ? 'gold' : 'coral'
 })));
+
+const distribution = document.getElementById('distribution');
+if (distribution) {
+  const svgNamespace = 'http://www.w3.org/2000/svg';
+  const createSvgElement = (tag, attributes) => {
+    const element = document.createElementNS(svgNamespace, tag);
+    Object.entries(attributes).forEach(([name, value]) => element.setAttribute(name, value));
+    return element;
+  };
+  const baseline = 205;
+  const dueX = 530;
+  const dayWidth = 46;
+  const barWidth = 32;
+  const maxValue = Math.max(1, ...Object.values(grouped).map((list) => list.length));
+  const scale = 120 / maxValue;
+
+  distribution.replaceChildren(
+    createSvgElement('line', { x1: 70, x2: 990, y1: baseline, y2: baseline, class: 'axis-line' }),
+    ...Array.from({ length: maxValue }, (_, index) => {
+      const value = index + 1;
+      const y = baseline - value * scale;
+      return createSvgElement('line', { x1: 70, x2: 990, y1: y, y2: y, class: 'hist-grid' });
+    }),
+    ...Array.from({ length: maxValue }, (_, index) => {
+      const value = index + 1;
+      const y = baseline - value * scale + 4;
+      return createSvgElement('text', { x: 55, y, 'text-anchor': 'end', class: 'chart-text' });
+    }).map((label, index) => {
+      label.textContent = index + 1;
+      return label;
+    }),
+    createSvgElement('line', { x1: dueX, x2: dueX, y1: 48, y2: baseline, class: 'zero-line' }),
+    ...Object.entries(grouped).sort(([first], [second]) => first.localeCompare(second)).flatMap(([date, list]) => {
+      const x = dueX + offset(date) * dayWidth;
+      const height = list.length * scale;
+      const bar = createSvgElement('rect', {
+        x: x - barWidth / 2,
+        y: baseline - height,
+        width: barWidth,
+        height,
+        rx: 3,
+        class: `hist-bar${offset(date) === 0 ? ' due' : ''}${list.length === maxValue && offset(date) !== 0 ? ' peak' : ''}`
+      });
+      const value = createSvgElement('text', {
+        x,
+        y: baseline - height - 10,
+        'text-anchor': 'middle',
+        class: 'hist-value'
+      });
+      value.textContent = list.length;
+      const label = createSvgElement('text', {
+        x,
+        y: 227,
+        'text-anchor': 'middle',
+        class: 'hist-date'
+      });
+      label.textContent = offset(date) === 0 ? '16 · DPP' : fmtDate.format(toTime(date));
+      return [bar, value, label];
+    }),
+    createSvgElement('text', { x: 530, y: 258, 'text-anchor': 'middle', class: 'chart-text' })
+  );
+  distribution.lastChild.textContent = 'Numero di giocate per data pronosticata';
+}
 
 setText('money-gift', eur(gift));
 setText('money-pool', eur(total - gift));
